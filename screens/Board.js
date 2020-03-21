@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import CustomList from "./CustomList";
-import CreateNewList from "./CreateNewList";
+import CardsList from "./CardsList";
+import CreateCardsList from "./CreateCardsList";
 import { List } from "../components/List";
 import { authFirebase, readFirebaseData } from "../assets/firebase";
 
@@ -33,11 +33,11 @@ export default class Board extends React.Component {
         <List
           data={this.state.lists}
           renderItem={id => {
-            return <CustomList listId={id} />;
+            return <CardsList listId={id} />;
           }}
           horizontal
         />
-        <CreateNewList />
+        <CreateCardsList />
       </View>
     );
   }

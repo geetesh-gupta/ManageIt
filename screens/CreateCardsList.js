@@ -1,21 +1,20 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { FormView } from "../components/FormView";
 import { FormColoredTextField } from "../components/FormColoredTextField";
 import { FormButton } from "../components/FormButton";
 import { createFirebaseData } from "../assets/firebase";
 
-export default class CreateNewCard extends React.Component {
+export default class CreateCardsList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { title: "" };
+    this.state = {
+      title: ""
+    };
   }
 
-  createNewCard = title => {
-    const { listId, onComplete } = this.props;
-    createFirebaseData("cards/", { title, listId }, res => {
-      console.log("New Card Created", res.key);
-      onComplete(res.key);
+  createNewList = title => {
+    createFirebaseData("lists/", { title, cardIds: [] }, res => {
+      console.log("New list Created", res.key);
     });
   };
 
@@ -23,19 +22,14 @@ export default class CreateNewCard extends React.Component {
     return (
       <FormView>
         <FormColoredTextField
-          title="Create new card"
+          title="Create new List"
           onChangeText={title => this.setState({ title })}
         />
         <FormButton
           value="Create"
-          onFormSubmit={() => this.createNewCard(this.state.title)}
+          onFormSubmit={() => this.createNewList(this.state.title)}
         />
       </FormView>
     );
   }
 }
-
-CreateNewCard.propTypes = {
-  listId: PropTypes.string.isRequired,
-  onComplete: PropTypes.func.isRequired
-};

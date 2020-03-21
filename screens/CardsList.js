@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, Text, View } from "react-native";
 import { List } from "../components/List";
-import CreateNewCard from "./CreateNewCard";
-import CustomCard from "./CustomCard";
+import CreateCardItem from "./CreateCardItem";
+import CardItem from "./CardItem";
 import { Card } from "../components/Card";
 import { readFirebaseData, updateFirebaseData } from "../assets/firebase";
 
-export default class CustomList extends React.Component {
+export default class CardsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = { cardIds: [], listId: "" };
@@ -54,7 +54,7 @@ export default class CustomList extends React.Component {
   };
 
   renderItem = (cardId, index) => {
-    return <CustomCard cardId={cardId} listId={this.state.listId} />;
+    return <CardItem cardId={cardId} listId={this.state.listId} />;
   };
 
   render() {
@@ -71,7 +71,7 @@ export default class CustomList extends React.Component {
             );
           }}
         />
-        <CreateNewCard
+        <CreateCardItem
           listId={this.state.listId}
           onComplete={this.onNewCardCreated}
         />
@@ -88,6 +88,6 @@ const styles = StyleSheet.create({
   }
 });
 
-CustomList.propTypes = {
+CardsList.propTypes = {
   listId: PropTypes.string.isRequired
 };

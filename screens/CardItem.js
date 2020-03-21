@@ -8,7 +8,7 @@ import { FormView } from "../components/FormView";
 import { FormButton } from "../components/FormButton";
 import { readFirebaseData, updateFirebaseData } from "../assets/firebase";
 
-export default class CustomCard extends React.Component {
+export default class CardItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = { title: "", cardId: "", listId: "" };
@@ -78,7 +78,7 @@ export default class CustomCard extends React.Component {
   }
 }
 
-CustomCard.propTypes = {
+CardItem.propTypes = {
   cardId: PropTypes.string.isRequired,
   listId: PropTypes.string.isRequired
 };
