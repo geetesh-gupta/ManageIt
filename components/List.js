@@ -66,9 +66,9 @@ List.defaultProps = {
   renderItem: renderItem,
   keyExtractor: keyExtractor,
   onEndReached: renderOnEndReached,
-  ListHeaderComponent: renderListHeaderComponent(),
-  ListFooterComponent: renderListFooterComponent(),
-  ListEmptyComponent: renderListEmptyComponent()
+  ListHeaderComponent: renderListHeaderComponent,
+  ListFooterComponent: renderListFooterComponent,
+  ListEmptyComponent: renderListEmptyComponent
 };
 
 export { List };
