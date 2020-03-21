@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "../components/Button";
 import { authFirebase, logoutFirebase } from "../assets/firebase";
-import Board from "./Board";
+import BoardsList from "./BoardsList";
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -28,7 +28,7 @@ export default class Main extends React.Component {
       <View style={styles.container}>
         <Button onPress={this.handleLogOut}>Logout</Button>
         <Text>Hi {currentUser && currentUser.email}!</Text>
-        <Board />
+        <BoardsList />
       </View>
     );
   }
