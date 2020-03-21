@@ -6,7 +6,8 @@
     "jsx-a11y",
     "import",
     "eslint-plugin-prettier",
-    "eslint-plugin-react"
+    "eslint-plugin-react",
+    "prettier"
   ],
   "rules": {
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
@@ -33,7 +34,7 @@
         "trailingComma": "none",
         "singleQuote": false,
         "jsxSingleQuote": false,
-        "printWidth": 100,
+        "printWidth": 80,
         "semi": true,
         "jsxBracketSameLine": true
       }
