@@ -41,7 +41,7 @@ class FormColoredTextField extends React.Component {
           style={this.renderTextInputStyle()}
           onChangeText={value => {
             this.setState({ value });
-            this.props.onChangeText(this.state.value);
+            this.props.onChangeText(value);
           }}
           value={this.state.value}
           placeholder={this.props.placeholder}
