@@ -8,6 +8,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import useLinking from './navigation/useLinking';
+import * as firebase from "firebase";
+import {firebaseConfig} from "./assets/config";
+firebase.initializeApp(firebaseConfig)
 
 const Stack = createStackNavigator();
 

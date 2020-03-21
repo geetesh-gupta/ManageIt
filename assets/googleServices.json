@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "3738637954",
+    "firebase_url": "https://manageit-b89bf.firebaseio.com",
+    "project_id": "manageit-b89bf",
+    "storage_bucket": "manageit-b89bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3738637954:android:7ed4db3e88f9df8039869b",
+        "android_client_info": {
+          "package_name": "com.manage.it"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3738637954-2kshemvqijptu48rt8u2r73oboov6h40.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBebELPl6W71yEqpQQA7zwE-EtXtDiTWg4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "3738637954-2kshemvqijptu48rt8u2r73oboov6h40.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
