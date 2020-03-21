@@ -1,10 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import * as firebase from "firebase";
 import { Button } from "../components/Button";
 import CustomList from "./CustomList";
 import CreateNewList from "./CreateNewList";
 import { List } from "../components/List";
+import {
+  authFirebase,
+  logoutFirebase,
+  readFirebaseData
+} from "../assets/firebase";
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -13,29 +17,26 @@ export default class Main extends React.Component {
   }
 
   componentDidMount() {
-    const { currentUser } = firebase.auth();
+    const { currentUser } = authFirebase();
     this.setState({ currentUser });
-
-    const listRef = firebase.database().ref("lists/");
-    listRef.on("value", snap => {
-      const data = snap.val() ? snap.val() : {};
-      this.setState({
-        lists: Object.keys(data)
-      });
-    });
+    readFirebaseData(
+      "lists/",
+      "value",
+      data =>
+        this.setState({
+          lists: Object.keys(data)
+        }),
+      err => {
+        console.log("Unable to readd data", err);
+      }
+    );
   }
 
   handleLogOut = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        console.warn("Logged Out successfully");
-        // console.log("Logged Out successfully")
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    logoutFirebase(
+      () => console.warn("Logged Out successfully"),
+      err => console.log(err)
+    );
   };
 
   render() {

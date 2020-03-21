@@ -3,17 +3,16 @@ import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { SplashScreen } from "expo";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
-import * as firebase from "firebase";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import useLinking from "./navigation/useLinking";
-import { firebaseConfig } from "./assets/config";
 
 import Loading from "./screens/Loading";
 import SignUp from "./screens/SignUp";
 import Login from "./screens/Login";
 import Home from "./screens/Home";
+import { initFirebase } from "./assets/firebase";
 
-firebase.initializeApp(firebaseConfig);
+initFirebase();
 
 const AppSwitchNavigator = createSwitchNavigator({
   Loading,

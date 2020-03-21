@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import firebase from "firebase";
 import { Card } from "../components/Card";
 import { FormColoredTextField } from "../components/FormColoredTextField";
 import { FormButton } from "../components/FormButton";
 import { FormView } from "../components/FormView";
+import { signUpFirebase } from "../assets/firebase";
 
 export default class SignUp extends React.Component {
   constructor(props) {
@@ -13,11 +13,12 @@ export default class SignUp extends React.Component {
   }
 
   handleSignUp = () => {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(() => this.props.navigation.navigate("Main"))
-      .catch(error => this.setState({ errorMessage: error.message }));
+    signUpFirebase(
+      this.state.email,
+      this.state.password,
+      () => this.props.navigation.navigate("Main"),
+      error => this.setState({ errorMessage: error.message })
+    );
   };
 
   render() {

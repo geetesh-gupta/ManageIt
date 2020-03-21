@@ -1,8 +1,8 @@
 import React from "react";
-import firebase from "firebase";
 import { FormView } from "../components/FormView";
 import { FormColoredTextField } from "../components/FormColoredTextField";
 import { FormButton } from "../components/FormButton";
+import { createFirebaseData } from "../assets/firebase";
 
 export default class CreateNewList extends React.Component {
   constructor(props) {
@@ -13,13 +13,9 @@ export default class CreateNewList extends React.Component {
   }
 
   createNewList = title => {
-    firebase
-      .database()
-      .ref("lists/")
-      .push({ title, cardIds: [] })
-      .then(() => {
-        console.log("New list created");
-      });
+    createFirebaseData("lists/", { title, cardIds: [] }, res => {
+      console.log("New list Created", res.key);
+    });
   };
 
   render() {

@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import * as firebase from "firebase";
 import { Card } from "../components/Card";
 import { FormView } from "../components/FormView";
 import { FormButton } from "../components/FormButton";
 import { FormColoredTextField } from "../components/FormColoredTextField";
+import { loginFirebase } from "../assets/firebase";
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -14,11 +14,12 @@ export default class Login extends React.Component {
 
   handleLogin = () => {
     const { email, password } = this.state;
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => this.props.navigation.navigate("Main"))
-      .catch(error => this.setState({ errorMessage: error.message }));
+    loginFirebase(
+      email,
+      password,
+      () => this.props.navigation.navigate("Main"),
+      error => this.setState({ errorMessage: error.message })
+    );
   };
 
   render() {

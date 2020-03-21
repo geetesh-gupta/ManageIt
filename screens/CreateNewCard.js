@@ -1,9 +1,9 @@
 import React from "react";
-import firebase from "firebase";
 import PropTypes from "prop-types";
 import { FormView } from "../components/FormView";
 import { FormColoredTextField } from "../components/FormColoredTextField";
 import { FormButton } from "../components/FormButton";
+import { createFirebaseData } from "../assets/firebase";
 
 export default class CreateNewCard extends React.Component {
   constructor(props) {
@@ -12,17 +12,11 @@ export default class CreateNewCard extends React.Component {
   }
 
   createNewCard = title => {
-    const listRef = firebase.database().ref("cards/");
     const { listId, onComplete } = this.props;
-    listRef
-      .push({
-        title,
-        listId
-      })
-      .then(res => {
-        console.log("New Card created");
-        onComplete(res.key);
-      });
+    createFirebaseData("cards/", { title, listId }, res => {
+      console.log("New Card Created", res.key);
+      onComplete(res.key);
+    });
   };
 
   render() {

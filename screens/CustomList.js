@@ -1,47 +1,54 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, Text, View } from "react-native";
-import firebase from "firebase";
 import { List } from "../components/List";
 import CreateNewCard from "./CreateNewCard";
 import CustomCard from "./CustomCard";
 import { Card } from "../components/Card";
+import { readFirebaseData, updateFirebaseData } from "../assets/firebase";
 
 export default class CustomList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { cardIds: [], listId: "", listRef: null };
+    this.state = { cardIds: [], listId: "" };
   }
 
   componentDidMount() {
     // const { currentUser } = firebase.auth();
     const { listId } = this.props;
     // const listCardsRef = firebase.database().ref(`cards/${listId}`);
-    const listRef = firebase.database().ref(`lists/${listId}`);
 
-    listRef.on("value", snap => {
-      const data = snap.val() ? snap.val() : {};
-      this.setState({
-        title: data.title,
-        cardIds: data.cardIds || []
-      });
-    });
+    readFirebaseData(
+      `lists/${listId}`,
+      "value",
+      data => {
+        this.setState({
+          title: data.title,
+          cardIds: data.cardIds || []
+        });
+      },
+      err => console.log("Unable to read list", err)
+    );
     this.setState({
-      listId,
-      listRef
+      listId
     });
   }
 
   onNewCardCreated = cardId => {
-    const { listRef } = this.state;
+    const { listId } = this.state;
     this.setState(
       state => ({
         cardIds: [...state.cardIds, cardId]
       }),
       () => {
-        listRef.update({
-          cardIds: this.state.cardIds
-        });
+        updateFirebaseData(
+          `lists/${listId}`,
+          {
+            cardIds: this.state.cardIds
+          },
+          () => console.log("Successfully added card to the list"),
+          err => console.log("Error in updating", err)
+        );
       }
     );
   };
