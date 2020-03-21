@@ -7,7 +7,11 @@ import { FormButton } from "../components/FormButton";
 import { FormView } from "../components/FormView";
 
 export default class SignUp extends React.Component {
-  state = { email: "", password: "", errorMessage: null };
+  constructor(props) {
+    super(props);
+    this.state = { email: "", password: "", errorMessage: null };
+  }
+
   handleSignUp = () => {
     firebase
       .auth()

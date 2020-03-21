@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { StyleSheet, Text, View } from "react-native";
 import firebase from "firebase";
 import { List } from "../components/List";
@@ -80,3 +81,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   }
 });
+
+CustomList.propTypes = {
+  listId: PropTypes.string.isRequired
+};

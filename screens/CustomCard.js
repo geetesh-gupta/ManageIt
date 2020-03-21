@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import PropTypes from "prop-types";
+import { Text, View } from "react-native";
 import firebase from "firebase";
 import { Card } from "../components/Card";
 import { CardSection } from "../components/CardSection";
@@ -74,10 +75,7 @@ export default class CustomCard extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
-  }
-});
+CustomCard.propTypes = {
+  cardId: PropTypes.string.isRequired,
+  listId: PropTypes.string.isRequired
+};

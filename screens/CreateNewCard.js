@@ -1,11 +1,15 @@
 import React from "react";
 import firebase from "firebase";
+import PropTypes from "prop-types";
 import { FormView } from "../components/FormView";
 import { FormColoredTextField } from "../components/FormColoredTextField";
 import { FormButton } from "../components/FormButton";
 
 export default class CreateNewCard extends React.Component {
-  state = { title: "" };
+  constructor(props) {
+    super(props);
+    this.state = { title: "" };
+  }
 
   createNewCard = title => {
     const listRef = firebase.database().ref("cards/");
@@ -17,7 +21,6 @@ export default class CreateNewCard extends React.Component {
       })
       .then(res => {
         console.log("New Card created");
-        console.log(res)
         onComplete(res.key);
       });
   };
@@ -37,3 +40,8 @@ export default class CreateNewCard extends React.Component {
     );
   }
 }
+
+CreateNewCard.propTypes = {
+  listId: PropTypes.string.isRequired,
+  onComplete: PropTypes.func.isRequired
+};

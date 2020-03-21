@@ -7,7 +7,11 @@ import { FormButton } from "../components/FormButton";
 import { FormColoredTextField } from "../components/FormColoredTextField";
 
 export default class Login extends React.Component {
-  state = { email: "", password: "", errorMessage: null };
+  constructor(props) {
+    super(props);
+    this.state = { email: "", password: "", errorMessage: null };
+  }
+
   handleLogin = () => {
     const { email, password } = this.state;
     firebase

@@ -7,7 +7,10 @@ import CreateNewList from "./CreateNewList";
 import { List } from "../components/List";
 
 export default class Main extends React.Component {
-  state = { currentUser: null, lists: [] };
+  constructor(props) {
+    super(props);
+    this.state = { currentUser: null, lists: [] };
+  }
 
   componentDidMount() {
     const { currentUser } = firebase.auth();
