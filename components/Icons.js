@@ -4,7 +4,7 @@ import { baseColors, iconStyle } from "./defaultStyles";
 
 const CheckCircle = props => {
   return (
-    <Icon
+    <Icon.Button
       name="check-circle"
       size={props.size}
       color={iconStyle.ICON_COLOR_GREEN}
@@ -18,7 +18,7 @@ const CheckCircle = props => {
 
 const CrossCircle = props => {
   return (
-    <Icon
+    <Icon.Button
       name="close-circle"
       size={props.size}
       color={iconStyle.ICON_COLOR_RED}
@@ -32,15 +32,15 @@ const CrossCircle = props => {
 
 const PlusCircle = props => {
   return (
-    <Icon
+    <Icon.Button
       name={"plus"}
       size={iconStyle.ICON_SIZE_LARGE}
       color={"white"}
+      backgroundColor={baseColors.BACKGROUND_COLOR_SECONDARY}
+      borderRadius={iconStyle.ICON_SIZE_LARGE}
       style={[
         {
-          backgroundColor: baseColors.BACKGROUND_COLOR_SECONDARY,
-          // paddingRight: 0,
-          borderRadius: iconStyle.ICON_SIZE_LARGE / 2
+          paddingRight: 0
         },
         props.style
       ]}
@@ -50,7 +50,7 @@ const PlusCircle = props => {
 
 const CloseCircle = props => {
   return (
-    <Icon
+    <Icon.Button
       name="close"
       size={iconStyle.ICON_SIZE_LARGE}
       color={"white"}
