@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { List } from "../components/List";
 import { Card } from "../components/Card";
 import { authFirebase, readFirebaseData } from "../assets/firebase";
@@ -14,7 +14,6 @@ export default class CardsList extends React.Component {
 
   componentDidMount() {
     const { currentUser } = authFirebase();
-
     readFirebaseData(
       `${currentUser.uid}/boards/`,
       "value",
@@ -36,11 +35,17 @@ export default class CardsList extends React.Component {
 
   renderItem = board => {
     return (
-      <Card>
-        <CardSection>
-          <Text>{board.title}</Text>
-        </CardSection>
-      </Card>
+      <TouchableOpacity
+        onClick={() =>
+          this.props.navigation.navigate("Board", { key: board.key })
+        }
+      >
+        <Card>
+          <CardSection>
+            <Text>{board.title}</Text>
+          </CardSection>
+        </Card>
+      </TouchableOpacity>
     );
   };
 
