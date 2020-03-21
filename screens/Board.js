@@ -1,13 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import CustomList from "./CustomList";
 import CreateNewList from "./CreateNewList";
 import { List } from "../components/List";
-import {
-  authFirebase,
-  logoutFirebase,
-  readFirebaseData
-} from "../assets/firebase";
+import { authFirebase, readFirebaseData } from "../assets/firebase";
 
 export default class Board extends React.Component {
   constructor(props) {

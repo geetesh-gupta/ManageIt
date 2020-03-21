@@ -1,14 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "../components/Button";
-import CustomList from "./CustomList";
-import CreateNewList from "./CreateNewList";
-import { List } from "../components/List";
-import {
-  authFirebase,
-  logoutFirebase,
-  readFirebaseData
-} from "../assets/firebase";
+import { authFirebase, logoutFirebase } from "../assets/firebase";
 import Board from "./Board";
 
 export default class Main extends React.Component {
