@@ -70,7 +70,6 @@ export default class CustomList extends React.Component {
               </Card>
             );
           }}
-          s
         />
         <CreateNewCard
           listId={this.state.listId}
