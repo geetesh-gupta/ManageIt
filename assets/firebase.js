@@ -65,12 +65,7 @@ export const signUpFirebase = (
     .catch(err => errorCallback(err));
 };
 
-export const readFirebaseData = (
-  path,
-  eventType,
-  successCallback,
-  errorCallback
-) => {
+export const readFirebaseData = (path, eventType, successCallback) => {
   firebase
     .database()
     .ref(path)
