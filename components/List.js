@@ -43,6 +43,7 @@ class List extends React.Component {
         ListHeaderComponent={this.props.ListHeaderComponent}
         ListFooterComponent={this.props.ListFooterComponent}
         ListEmptyComponent={this.props.ListEmptyComponent}
+        horizontal={this.props.horizontal || false}
       />
     );
   }
