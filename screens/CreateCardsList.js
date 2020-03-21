@@ -3,6 +3,7 @@ import { FormView } from "../components/FormView";
 import { FormColoredTextField } from "../components/FormColoredTextField";
 import { FormButton } from "../components/FormButton";
 import { createFirebaseData, authFirebase } from "../assets/firebase";
+import PropTypes from "prop-types";
 
 export default class CreateCardsList extends React.Component {
   constructor(props) {
@@ -14,11 +15,13 @@ export default class CreateCardsList extends React.Component {
 
   createNewList = title => {
     const { currentUser } = authFirebase();
+    const { boardId, onComplete } = this.props;
     createFirebaseData(
       `${currentUser.uid}/lists/`,
-      { title, cardIds: [] },
+      { title, cardIds: [], boardId },
       res => {
         console.log("New list Created", res.key);
+        onComplete(res.key);
       }
     );
   };
@@ -38,3 +41,8 @@ export default class CreateCardsList extends React.Component {
     );
   }
 }
+
+CreateCardsList.propTypes = {
+  boardId: PropTypes.string.isRequired,
+  onComplete: PropTypes.func.isRequired
+};

@@ -20,7 +20,6 @@ export default class CardsList extends React.Component {
   componentDidMount() {
     const { currentUser } = authFirebase();
     const { listId } = this.props;
-    // const listCardsRef = firebase.database().ref(`cards/${listId}`);
 
     readFirebaseData(
       `${currentUser.uid}/lists/${listId}`,
