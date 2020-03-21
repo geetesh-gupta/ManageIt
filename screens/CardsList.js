@@ -5,7 +5,11 @@ import { List } from "../components/List";
 import CreateCardItem from "./CreateCardItem";
 import CardItem from "./CardItem";
 import { Card } from "../components/Card";
-import { readFirebaseData, updateFirebaseData } from "../assets/firebase";
+import {
+  readFirebaseData,
+  updateFirebaseData,
+  authFirebase
+} from "../assets/firebase";
 
 export default class CardsList extends React.Component {
   constructor(props) {
@@ -14,12 +18,12 @@ export default class CardsList extends React.Component {
   }
 
   componentDidMount() {
-    // const { currentUser } = firebase.auth();
+    const { currentUser } = authFirebase();
     const { listId } = this.props;
     // const listCardsRef = firebase.database().ref(`cards/${listId}`);
 
     readFirebaseData(
-      `lists/${listId}`,
+      `${currentUser.uid}/lists/${listId}`,
       "value",
       data => {
         this.setState({
@@ -36,13 +40,15 @@ export default class CardsList extends React.Component {
 
   onNewCardCreated = cardId => {
     const { listId } = this.state;
+    const { currentUser } = authFirebase();
+
     this.setState(
       state => ({
         cardIds: [...state.cardIds, cardId]
       }),
       () => {
         updateFirebaseData(
-          `lists/${listId}`,
+          `${currentUser.uid}/lists/${listId}`,
           {
             cardIds: this.state.cardIds
           },

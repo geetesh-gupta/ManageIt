@@ -8,14 +8,14 @@ import { authFirebase, readFirebaseData } from "../assets/firebase";
 export default class Board extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { currentUser: null, lists: [] };
+    this.state = { lists: [] };
   }
 
   componentDidMount() {
     const { currentUser } = authFirebase();
-    this.setState({ currentUser });
+
     readFirebaseData(
-      "lists/",
+      `${currentUser.uid}/lists/`,
       "value",
       data =>
         this.setState({

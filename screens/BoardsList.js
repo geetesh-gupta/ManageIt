@@ -13,10 +13,10 @@ export default class CardsList extends React.Component {
   }
 
   componentDidMount() {
-    // const { currentUser } = authFirebase();
+    const { currentUser } = authFirebase();
 
     readFirebaseData(
-      "boards/",
+      `${currentUser.uid}/boards/`,
       "value",
       data => {
         const boards = [];

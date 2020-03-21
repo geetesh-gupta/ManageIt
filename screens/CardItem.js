@@ -6,7 +6,11 @@ import { CardSection } from "../components/CardSection";
 import { FormColoredTextField } from "../components/FormColoredTextField";
 import { FormView } from "../components/FormView";
 import { FormButton } from "../components/FormButton";
-import { readFirebaseData, updateFirebaseData } from "../assets/firebase";
+import {
+  readFirebaseData,
+  updateFirebaseData,
+  authFirebase
+} from "../assets/firebase";
 
 export default class CardItem extends React.Component {
   constructor(props) {
@@ -16,13 +20,15 @@ export default class CardItem extends React.Component {
 
   componentDidMount() {
     const { cardId, listId } = this.props;
+    const { currentUser } = authFirebase();
+
     this.setState({
       listId,
       cardId
     });
 
     readFirebaseData(
-      `cards/${cardId}`,
+      `${currentUser.uid}/cards/${cardId}`,
       "value",
       data => {
         if (data) {
@@ -36,8 +42,10 @@ export default class CardItem extends React.Component {
   }
 
   updateCard = title => {
+    const { currentUser } = authFirebase();
+
     updateFirebaseData(
-      "cards/",
+      `${currentUser.uid}/cards/`,
       {
         [this.state.cardId]: {
           title

@@ -2,7 +2,7 @@ import React from "react";
 import { FormView } from "../components/FormView";
 import { FormColoredTextField } from "../components/FormColoredTextField";
 import { FormButton } from "../components/FormButton";
-import { createFirebaseData } from "../assets/firebase";
+import { createFirebaseData, authFirebase } from "../assets/firebase";
 
 export default class CreateCardsList extends React.Component {
   constructor(props) {
@@ -13,9 +13,14 @@ export default class CreateCardsList extends React.Component {
   }
 
   createNewBoard = title => {
-    createFirebaseData("boards/", { title, listIds: [] }, res => {
-      console.log("New board Created", res.key);
-    });
+    const { currentUser } = authFirebase();
+    createFirebaseData(
+      `${currentUser.uid}/boards/`,
+      { title, listIds: [] },
+      res => {
+        console.log("New board Created", res.key);
+      }
+    );
   };
 
   render() {
