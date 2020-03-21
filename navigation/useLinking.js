@@ -11,7 +11,8 @@ export default function(containerRef) {
           Home: "home",
           Login: "login",
           SignUp: "signup",
-          Loading: "loading"
+          Loading: "loading",
+          Board: "board"
         }
       }
     }

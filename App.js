@@ -10,6 +10,7 @@ import Loading from "./screens/Loading";
 import SignUp from "./screens/SignUp";
 import Login from "./screens/Login";
 import Home from "./screens/Home";
+import Board from "./screens/Board";
 import { initFirebase } from "./assets/firebase";
 
 initFirebase();
@@ -18,7 +19,8 @@ const AppSwitchNavigator = createSwitchNavigator({
   Loading,
   Login,
   SignUp,
-  Home
+  Home,
+  Board
 });
 
 const AppNavigator = createAppContainer(AppSwitchNavigator);
