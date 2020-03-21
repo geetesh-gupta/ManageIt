@@ -8,6 +8,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import useLinking from "./navigation/useLinking";
 
 import { navigationRef } from "./components/RootNavigation";
+import { headerOptions } from "./components/headerOptions";
+
 import Loading from "./screens/Loading";
 import SignUp from "./screens/SignUp";
 import Login from "./screens/Login";
@@ -58,7 +60,10 @@ export default function App(props) {
     <View style={styles.container}>
       {Platform.OS === "ios" && <StatusBar barStyle="default" />}
       <NavigationContainer ref={navigationRef}>
-        <Stack.Navigator initialRouteName="Loading">
+        <Stack.Navigator
+          initialRouteName="Loading"
+          screenOptions={headerOptions}
+        >
           <Stack.Screen name="Loading" component={Loading} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="SignUp" component={SignUp} />

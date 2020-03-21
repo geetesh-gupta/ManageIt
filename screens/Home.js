@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "../components/Button";
-import { authFirebase, logoutFirebase } from "../assets/firebase";
+import { authFirebase } from "../assets/firebase";
 import BoardsList from "./BoardsList";
 
 export default class Home extends React.Component {
@@ -15,18 +15,10 @@ export default class Home extends React.Component {
     this.setState({ currentUser });
   }
 
-  handleLogOut = () => {
-    logoutFirebase(
-      () => console.warn("Logged Out successfully"),
-      err => console.log(err)
-    );
-  };
-
   render() {
     const { currentUser } = this.state;
     return (
       <View style={styles.container}>
-        <Button onPress={this.handleLogOut}>Logout</Button>
         <Text>Hi {currentUser && currentUser.email}!</Text>
         <BoardsList {...this.props} />
       </View>
