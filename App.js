@@ -3,27 +3,22 @@ import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { SplashScreen } from "expo";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
-import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import useLinking from "./navigation/useLinking";
 
+import { navigationRef } from "./components/RootNavigation";
 import Loading from "./screens/Loading";
 import SignUp from "./screens/SignUp";
 import Login from "./screens/Login";
 import Home from "./screens/Home";
 import Board from "./screens/Board";
+import BoardsList from "./screens/BoardsList";
 import { initFirebase } from "./assets/firebase";
 
 initFirebase();
 
-const AppSwitchNavigator = createSwitchNavigator({
-  Loading,
-  Login,
-  SignUp,
-  Home,
-  Board
-});
-
-const AppNavigator = createAppContainer(AppSwitchNavigator);
+const Stack = createStackNavigator();
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
@@ -62,7 +57,16 @@ export default function App(props) {
   return (
     <View style={styles.container}>
       {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-      <AppNavigator />
+      <NavigationContainer ref={navigationRef}>
+        <Stack.Navigator initialRouteName="Loading">
+          <Stack.Screen name="Loading" component={Loading} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="BoardsList" component={BoardsList} />
+          <Stack.Screen name="Board" component={Board} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </View>
   );
 }

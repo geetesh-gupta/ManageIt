@@ -12,7 +12,8 @@ export default function(containerRef) {
           Login: "login",
           SignUp: "signup",
           Loading: "loading",
-          Board: "board"
+          Board: "board",
+          BoardsLIst: "boardsList"
         }
       }
     }
