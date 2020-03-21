@@ -5,7 +5,7 @@ export const baseColors = {
     NAV_COLOR: '#020206',
     ICON_COLOR_GREEN: '#2FFA3C',
     BACKGROUND_COLOR_PRIMARY: '#fff',
-    BACKGROUND_COLOR_SECONDARY: this.THEME_COLOR,
+    BACKGROUND_COLOR_SECONDARY: "#6818A0",
 }
 
 export const fontStyle = {

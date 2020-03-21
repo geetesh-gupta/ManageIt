@@ -1,12 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Button } from './Button';
-import PropTypes from 'prop-types';
+import {View} from 'react-native';
+import {Button} from './Button';
 
 class FormButton extends React.Component {
     render() {
         return (
-            <View style={[{ justifyContent: 'center', alignItems: 'center' }, this.props.style]}>
+            <View style={[{justifyContent: 'center', alignItems: 'center'}, this.props.style]}>
                 <Button
                     onPress={this.props.onFormSubmit}
                 >
@@ -15,15 +14,6 @@ class FormButton extends React.Component {
             </View>
         )
     };
-};
+}
 
-
-FormButton.propTypes = {
-    style: PropTypes.func
-};
-
-FormButton.defaultProps = {
-    style: {}
-};
-
-export { FormButton }
+export {FormButton}
