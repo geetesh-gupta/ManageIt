@@ -16,7 +16,7 @@ export default class SignUp extends React.Component {
     signUpFirebase(
       this.state.email,
       this.state.password,
-      () => this.props.navigation.navigate("Main"),
+      () => this.props.navigation.navigate("Home"),
       error => this.setState({ errorMessage: error.message })
     );
   };

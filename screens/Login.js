@@ -17,7 +17,7 @@ export default class Login extends React.Component {
     loginFirebase(
       email,
       password,
-      () => this.props.navigation.navigate("Main"),
+      () => this.props.navigation.navigate("Home"),
       error => this.setState({ errorMessage: error.message })
     );
   };

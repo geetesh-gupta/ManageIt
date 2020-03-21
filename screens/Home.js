@@ -4,7 +4,7 @@ import { Button } from "../components/Button";
 import { authFirebase, logoutFirebase } from "../assets/firebase";
 import BoardsList from "./BoardsList";
 
-export default class Main extends React.Component {
+export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = { currentUser: null };
@@ -28,7 +28,7 @@ export default class Main extends React.Component {
       <View style={styles.container}>
         <Button onPress={this.handleLogOut}>Logout</Button>
         <Text>Hi {currentUser && currentUser.email}!</Text>
-        <BoardsList />
+        <BoardsList {...this.props} />
       </View>
     );
   }
