@@ -86,7 +86,6 @@ export default class Board extends React.Component {
             }}
             horizontal
             showsHorizontalScrollIndicator
-            pagingEnabled
           />
         </View>
       </View>
