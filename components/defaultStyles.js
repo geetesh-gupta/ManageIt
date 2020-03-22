@@ -1,6 +1,6 @@
 export const baseColors = {
   THEME_COLOR: "#6818A0",
-  COLOR_PRIMARY: "#352641",
+  COLOR_PRIMARY: "#141C3A",
   COLOR_SECONDARY: "#fff",
   NAV_COLOR: "#020206",
   ICON_COLOR_GREEN: "#2FFA3C",
@@ -9,23 +9,10 @@ export const baseColors = {
 };
 
 export const fontStyle = {
-  FONT_FAMILY_LIGHT: "Montserrat-Light",
-  FONT_FAMILY_SEMI_BOLD: "Montserrat-SemiBold",
-  FONT_FAMILY_EXTRA_LIGHT: "Montserrat-ExtraLight",
-  FONT_FAMILY_EXTRA_BOLD: "Montserrat-ExtraBold",
-  FONT_FAMILY_BLACK: "Montserrat-Black",
-  FONT_FAMILY_BOLD_ITALIC: "Montserrat-BoldItalic",
-  FONT_FAMILY_ITALIC: "Montserrat-Italic",
-  FONT_FAMILY_LIGHT_ITALIC: "Montserrat-LightItalic",
-  FONT_FAMILY_MEDIUM_ITALIC: "Montserrat-MediumItalic",
-  FONT_FAMILY_SEMI_BOLD_ITALIC: "Montserrat-SemiBoldItalic",
-  FONT_FAMILY_THIN: "Montserrat-Thin",
-  FONT_FAMILY_THIN_ITALIC: "Montserrat-ThinItalic",
-  FONT_FAMILY_EXTRA_BOLD_ITALIC: "Montserrat-ExtraBoldItalic",
-  FONT_FAMILY_EXTRA_LIGHT_ITALIC: "Montserrat-ExtraLightItalic",
-  FONT_FAMILY_MEDIUM: "Montserrat-Medium",
-  FONT_FAMILY_NORMAL: "Montserrat-Regular",
-  FONT_FAMILY_BOLD: "Montserrat-Bold",
+  FONT_FAMILY_LIGHT: "Roboto",
+  FONT_FAMILY_NORMAL: "Roboto",
+  FONT_FAMILY_SEMI_BOLD: "Roboto",
+  FONT_FAMILY_BOLD: "Roboto",
 
   FONT_SIZE_LARGE: 24,
   FONT_SIZE_TITLE: 20,
