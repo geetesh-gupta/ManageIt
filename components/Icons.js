@@ -38,6 +38,7 @@ const PlusCircle = props => {
       color={"white"}
       backgroundColor={baseColors.BACKGROUND_COLOR_SECONDARY}
       borderRadius={iconStyle.ICON_SIZE_LARGE}
+      onPress={props.onPress}
       style={[
         {
           paddingRight: 0
