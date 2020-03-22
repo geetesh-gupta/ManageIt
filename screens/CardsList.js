@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import {
   readFirebaseData,
   updateFirebaseData,
   authFirebase
 } from "../assets/firebase";
 import CardItem from "./CardItem";
-import { baseColors } from "../components/defaultStyles";
+import { baseColors, fontStyle } from "../components/defaultStyles";
 import { List } from "../components/List";
 import { Card } from "../components/Card";
 import { StyledText } from "../components/StyledText";
@@ -70,7 +70,14 @@ export default class CardsList extends React.Component {
     return (
       <Card style={styles.card}>
         <CardSection style={styles.cardSection}>
-          <StyledText>{this.state.title}</StyledText>
+          <StyledText
+            style={{
+              alignSelf: "center",
+              color: fontStyle.FONT_COLOR_SECONDARY
+            }}
+          >
+            {this.state.title}
+          </StyledText>
           <PlusCircle
             size={30}
             onPress={() =>
@@ -81,9 +88,9 @@ export default class CardsList extends React.Component {
             }
           />
         </CardSection>
-        <CardSection style={styles.cardSection}>
+        <View style={{ flex: 1 }}>
           <List data={this.state.cardIds} renderItem={this.renderItem} />
-        </CardSection>
+        </View>
       </Card>
     );
   }
@@ -93,11 +100,13 @@ const styles = StyleSheet.create({
   card: {
     borderColor: baseColors.BACKGROUND_COLOR_SECONDARY,
     margin: 10,
-    width: 250
+    width: 250,
+    padding: 0
   },
   cardSection: {
     justifyContent: "space-between",
-    alignItems: "flex-start"
+    alignItems: "flex-start",
+    backgroundColor: baseColors.BACKGROUND_COLOR_SECONDARY
   }
 });
 

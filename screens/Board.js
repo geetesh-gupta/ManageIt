@@ -78,15 +78,17 @@ export default class Board extends React.Component {
             }
           />
         </CardSection>
-        <CardSection style={styles.cardSection}>
+        <View style={{ flex: 1 }}>
           <List
             data={this.state.listIds}
             renderItem={id => {
               return <CardsList listId={id} />;
             }}
             horizontal
+            showsHorizontalScrollIndicator
+            pagingEnabled
           />
-        </CardSection>
+        </View>
       </View>
     );
   }
