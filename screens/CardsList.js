@@ -92,7 +92,8 @@ export default class CardsList extends React.Component {
 const styles = StyleSheet.create({
   card: {
     borderColor: baseColors.BACKGROUND_COLOR_SECONDARY,
-    margin: 10
+    margin: 10,
+    width: 250
   },
   cardSection: {
     justifyContent: "space-between",
