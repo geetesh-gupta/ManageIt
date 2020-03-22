@@ -1,29 +1,25 @@
 import React from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, View, ViewPropTypes } from "react-native";
 import PropTypes from "prop-types";
-
-const renderItem = (item, index) => {
-  return <Text>{index}</Text>;
-};
 
 const keyExtractor = (item, index) => {
   return index.toString();
 };
 
-const renderListHeaderComponent = () => {
-  return <View></View>;
+const ListHeaderComponent = () => {
+  return <View />;
 };
 
-const renderListFooterComponent = () => {
-  return <View></View>;
+const ListFooterComponent = () => {
+  return <View />;
 };
 
-const renderListEmptyComponent = () => {
-  return <View></View>;
+const ListEmptyComponent = () => {
+  return <View />;
 };
 
-const renderOnEndReached = () => {
-  return <View></View>;
+const onEndReached = () => {
+  return <View />;
 };
 
 class List extends React.Component {
@@ -37,13 +33,20 @@ class List extends React.Component {
           (this.props.data && this.props.data.length)
         }
         onEndReached={this.props.onEndReached}
-        onEndReachedThreshold={this.props.onEndReachedThreshold || 0.1}
+        onEndReachedThreshold={this.props.onEndReachedThreshold}
         renderItem={({ item, index }) => this.props.renderItem(item, index)}
         keyExtractor={(item, index) => this.props.keyExtractor(item, index)}
         ListHeaderComponent={this.props.ListHeaderComponent}
         ListFooterComponent={this.props.ListFooterComponent}
         ListEmptyComponent={this.props.ListEmptyComponent}
-        horizontal={this.props.horizontal || false}
+        horizontal={this.props.horizontal}
+        pagingEnabled={this.props.pagingEnabled}
+        showsHorizontalScrollIndicator={
+          this.props.showsHorizontalScrollIndicator
+        }
+        style={this.props.style}
+        contentContainerStyle={this.props.contentContainerStyle}
+        numColumns={this.props.numColumns}
       />
     );
   }
@@ -55,20 +58,32 @@ List.propTypes = {
   renderItem: PropTypes.func.isRequired,
   keyExtractor: PropTypes.func,
   onEndReached: PropTypes.func,
+  onEndReachedThreshold: PropTypes.number,
   ListHeaderComponent: PropTypes.func,
   ListFooterComponent: PropTypes.func,
-  ListEmptyComponent: PropTypes.func
+  ListEmptyComponent: PropTypes.func,
+  horizontal: PropTypes.bool,
+  pagingEnabled: PropTypes.bool,
+  showsHorizontalScrollIndicator: PropTypes.bool,
+  style: ViewPropTypes.style,
+  contentContainerStyle: ViewPropTypes.style,
+  numColumns: PropTypes.number
 };
 
 List.defaultProps = {
-  data: [],
   initialNumToRender: 6,
-  renderItem: renderItem,
-  keyExtractor: keyExtractor,
-  onEndReached: renderOnEndReached,
-  ListHeaderComponent: renderListHeaderComponent,
-  ListFooterComponent: renderListFooterComponent,
-  ListEmptyComponent: renderListEmptyComponent
+  keyExtractor,
+  onEndReached,
+  onEndReachedThreshold: 0.1,
+  ListHeaderComponent,
+  ListFooterComponent,
+  ListEmptyComponent,
+  horizontal: false,
+  pagingEnabled: false,
+  showsHorizontalScrollIndicator: false,
+  style: {},
+  contentContainerStyle: {},
+  numColumns: 1
 };
 
 export { List };
