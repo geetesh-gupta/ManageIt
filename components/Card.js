@@ -1,18 +1,20 @@
 import React from "react";
-import { View } from "react-native";
-import styles from "./styles";
+import { View, ViewPropTypes } from "react-native";
 import PropTypes from "prop-types";
+import styles from "./styles";
 
 const Card = props => {
   return <View style={[styles.cardView, props.style]}>{props.children}</View>;
 };
 
 Card.propTypes = {
-  style: PropTypes.object
+  style: ViewPropTypes.style,
+  children: PropTypes.node
 };
 
 Card.defaultProps = {
-  style: {}
+  style: {},
+  children: PropTypes.element
 };
 
 export { Card };
