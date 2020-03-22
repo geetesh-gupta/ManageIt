@@ -1,15 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, Text, View } from "react-native";
-import { List } from "../components/List";
-import CreateCardItem from "./CreateCardItem";
-import CardItem from "./CardItem";
-import { Card } from "../components/Card";
+import { StyleSheet } from "react-native";
 import {
   readFirebaseData,
   updateFirebaseData,
   authFirebase
 } from "../assets/firebase";
+import CardItem from "./CardItem";
+import { baseColors } from "../components/defaultStyles";
+import { List } from "../components/List";
+import { Card } from "../components/Card";
+import { StyledText } from "../components/StyledText";
+import { CardSection } from "../components/CardSection";
+import { PlusCircle } from "../components/Icons";
+import { navigate } from "../components/RootNavigation";
 
 export default class CardsList extends React.Component {
   constructor(props) {
@@ -58,38 +62,41 @@ export default class CardsList extends React.Component {
     );
   };
 
-  renderItem = (cardId, index) => {
+  renderItem = cardId => {
     return <CardItem cardId={cardId} listId={this.state.listId} />;
   };
 
   render() {
     return (
-      <View style={styles.container}>
-        <List
-          data={this.state.cardIds}
-          renderItem={this.renderItem}
-          ListHeaderComponent={() => {
-            return (
-              <Card>
-                <Text>{this.state.title}</Text>
-              </Card>
-            );
-          }}
-        />
-        <CreateCardItem
-          listId={this.state.listId}
-          onComplete={this.onNewCardCreated}
-        />
-      </View>
+      <Card style={styles.card}>
+        <CardSection style={styles.cardSection}>
+          <StyledText>{this.state.title}</StyledText>
+          <PlusCircle
+            size={30}
+            onPress={() =>
+              navigate("NewCard", {
+                listId: this.state.listId,
+                callback: this.onNewCardCreated
+              })
+            }
+          />
+        </CardSection>
+        <CardSection style={styles.cardSection}>
+          <List data={this.state.cardIds} renderItem={this.renderItem} />
+        </CardSection>
+      </Card>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+  card: {
+    borderColor: baseColors.BACKGROUND_COLOR_SECONDARY,
+    margin: 10
+  },
+  cardSection: {
+    justifyContent: "space-between",
+    alignItems: "flex-start"
   }
 });
 

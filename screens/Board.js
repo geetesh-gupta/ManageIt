@@ -1,15 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 import CardsList from "./CardsList";
-import CreateCardsList from "./CreateCardsList";
-import { Card } from "../components/Card";
-import { List } from "../components/List";
 import {
   authFirebase,
   readFirebaseData,
   updateFirebaseData
 } from "../assets/firebase";
+import { baseColors } from "../components/defaultStyles";
+import { List } from "../components/List";
+import { CardSection } from "../components/CardSection";
+import { StyledText } from "../components/StyledText";
+import { PlusCircle } from "../components/Icons";
+import { navigate } from "../components/RootNavigation";
 
 export default class Board extends React.Component {
   constructor(props) {
@@ -19,10 +22,10 @@ export default class Board extends React.Component {
 
   componentDidMount() {
     const { currentUser } = authFirebase();
-    const { key } = this.props.route.params;
+    const { boardId } = this.props.route.params;
 
     readFirebaseData(
-      `${currentUser.uid}/boards/${key}/`,
+      `${currentUser.uid}/boards/${boardId}/`,
       "value",
       data => {
         this.setState({
@@ -35,7 +38,7 @@ export default class Board extends React.Component {
       }
     );
     this.setState({
-      boardId: key
+      boardId
     });
   }
 
@@ -63,24 +66,27 @@ export default class Board extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <List
-          data={this.state.listIds}
-          renderItem={id => {
-            return <CardsList listId={id} />;
-          }}
-          ListHeaderComponent={() => {
-            return (
-              <Card>
-                <Text>{this.state.title}</Text>
-              </Card>
-            );
-          }}
-          horizontal
-        />
-        <CreateCardsList
-          boardId={this.state.boardId}
-          onComplete={this.onNewListCreated}
-        />
+        <CardSection style={styles.cardSection}>
+          <StyledText>{this.state.title}</StyledText>
+          <PlusCircle
+            size={30}
+            onPress={() =>
+              navigate("NewList", {
+                boardId: this.state.boardId,
+                callback: this.onNewListCreated
+              })
+            }
+          />
+        </CardSection>
+        <CardSection style={styles.cardSection}>
+          <List
+            data={this.state.listIds}
+            renderItem={id => {
+              return <CardsList listId={id} />;
+            }}
+            horizontal
+          />
+        </CardSection>
       </View>
     );
   }
@@ -89,11 +95,18 @@ export default class Board extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    backgroundColor: baseColors.BACKGROUND_COLOR_PRIMARY
+  },
+  cardSection: {
+    justifyContent: "space-between",
+    alignItems: "flex-start"
   }
 });
 
-// Board.propTypes = {
-//   key: PropTypes.string.isRequired
-// };
+Board.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      boardId: PropTypes.string.isRequired
+    })
+  }).isRequired
+};

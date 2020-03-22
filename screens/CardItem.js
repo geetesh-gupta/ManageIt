@@ -1,11 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { Card } from "../components/Card";
 import { CardSection } from "../components/CardSection";
-import { FormColoredTextField } from "../components/FormColoredTextField";
-import { FormView } from "../components/FormView";
-import { FormButton } from "../components/FormButton";
+import { StyledText } from "../components/StyledText";
 import {
   readFirebaseData,
   updateFirebaseData,
@@ -59,32 +57,27 @@ export default class CardItem extends React.Component {
   render() {
     const { title, cardId, listId } = this.state;
     return (
-      <View>
-        <Card>
-          <CardSection>
-            <Text>{title}</Text>
-          </CardSection>
-          <CardSection>
-            <Text>{cardId}</Text>
-          </CardSection>
-          <CardSection>
-            <Text>{listId}</Text>
-          </CardSection>
-        </Card>
-        <FormView>
-          <FormColoredTextField
-            title="Change Title"
-            onChangeText={val => this.setState({ title: val })}
-          />
-          <FormButton
-            value="Change"
-            onFormSubmit={() => this.updateCard(this.state.title)}
-          />
-        </FormView>
-      </View>
+      <Card style={styles.card}>
+        <CardSection>
+          <StyledText>{title}</StyledText>
+        </CardSection>
+        <CardSection>
+          <StyledText>{cardId}</StyledText>
+        </CardSection>
+        <CardSection>
+          <StyledText>{listId}</StyledText>
+        </CardSection>
+      </Card>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  card: {
+    borderColor: "black",
+    margin: 10
+  }
+});
 
 CardItem.propTypes = {
   cardId: PropTypes.string.isRequired,

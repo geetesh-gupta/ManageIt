@@ -1,10 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { List } from "../components/List";
 import { Card } from "../components/Card";
 import { authFirebase, readFirebaseData } from "../assets/firebase";
-import CreateBoard from "./CreateBoard";
 import { CardSection } from "../components/CardSection";
+import { PlusCircle } from "../components/Icons";
+import { StyledText } from "../components/StyledText";
+import { navigate } from "../components/RootNavigation";
 
 export default class CardsList extends React.Component {
   constructor(props) {
@@ -22,7 +24,7 @@ export default class CardsList extends React.Component {
         Object.keys(data).forEach(key => {
           boards.push({
             title: data[key].title,
-            key
+            boardId: key
           });
         });
         this.setState({
@@ -33,16 +35,12 @@ export default class CardsList extends React.Component {
     );
   }
 
-  renderItem = board => {
+  renderItem = ({ title, boardId }) => {
     return (
-      <TouchableOpacity
-        onClick={() =>
-          this.props.navigation.navigate("Board", { key: board.key })
-        }
-      >
-        <Card>
+      <TouchableOpacity onPress={() => navigate("Board", { boardId })}>
+        <Card style={{ borderColor: "black", margin: 10 }}>
           <CardSection>
-            <Text>{board.title}</Text>
+            <StyledText>{title}</StyledText>
           </CardSection>
         </Card>
       </TouchableOpacity>
@@ -50,20 +48,16 @@ export default class CardsList extends React.Component {
   };
 
   render() {
+    const { currentUser } = authFirebase();
     return (
       <View style={styles.container}>
-        <List
-          data={this.state.boards}
-          renderItem={this.renderItem}
-          ListHeaderComponent={() => {
-            return (
-              <Card>
-                <Text>{this.state.title}</Text>
-              </Card>
-            );
-          }}
-        />
-        <CreateBoard />
+        <CardSection style={styles.cardSection}>
+          <StyledText>Hi {currentUser && currentUser.email}!</StyledText>
+          <PlusCircle size={30} onPress={() => navigate("NewBoard")} />
+        </CardSection>
+        <CardSection style={styles.cardSection}>
+          <List data={this.state.boards} renderItem={this.renderItem} />
+        </CardSection>
       </View>
     );
   }
@@ -71,8 +65,10 @@ export default class CardsList extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    flex: 1
+  },
+  cardSection: {
+    justifyContent: "space-between",
+    alignItems: "flex-start"
   }
 });

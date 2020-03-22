@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { FormView } from "../components/FormView";
 import { FormColoredTextField } from "../components/FormColoredTextField";
 import { FormButton } from "../components/FormButton";
 import { createFirebaseData, authFirebase } from "../assets/firebase";
 
-export default class CreateCardsList extends React.Component {
+export default class CreateBoard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,11 +15,18 @@ export default class CreateCardsList extends React.Component {
 
   createNewBoard = title => {
     const { currentUser } = authFirebase();
+    // const { callback } = this.props;
+
     createFirebaseData(
       `${currentUser.uid}/boards/`,
       { title, listIds: [] },
       res => {
         console.log("New board Created", res.key);
+        // callback(res.boardId);
+        this.props.navigation.goBack();
+      },
+      err => {
+        console.log("Error in creating new board", err);
       }
     );
   };
@@ -38,3 +46,9 @@ export default class CreateCardsList extends React.Component {
     );
   }
 }
+CreateBoard.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired
+  }).isRequired
+};

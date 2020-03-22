@@ -4,6 +4,7 @@ import { FormView } from "../components/FormView";
 import { FormColoredTextField } from "../components/FormColoredTextField";
 import { FormButton } from "../components/FormButton";
 import { createFirebaseData, authFirebase } from "../assets/firebase";
+import { goBack } from "../components/RootNavigation";
 
 export default class CreateCardItem extends React.Component {
   constructor(props) {
@@ -13,11 +14,17 @@ export default class CreateCardItem extends React.Component {
 
   createNewCard = title => {
     const { currentUser } = authFirebase();
-    const { listId, onComplete } = this.props;
-    createFirebaseData(`${currentUser.uid}/cards/`, { title, listId }, res => {
-      console.log("New Card Created", res.key);
-      onComplete(res.key);
-    });
+    const { listId, callback } = this.props.route.params;
+    createFirebaseData(
+      `${currentUser.uid}/cards/`,
+      { title, listId },
+      res => {
+        console.log("New Card Created", res.key);
+        callback(res.key);
+        goBack({ listId });
+      },
+      err => console.log("Error while creating new card", err)
+    );
   };
 
   render() {
@@ -37,6 +44,14 @@ export default class CreateCardItem extends React.Component {
 }
 
 CreateCardItem.propTypes = {
-  listId: PropTypes.string.isRequired,
-  onComplete: PropTypes.func.isRequired
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      listId: PropTypes.string.isRequired,
+      callback: PropTypes.func
+    })
+  })
+};
+
+CreateCardItem.defaultProps = {
+  route: { params: { callback: undefined } }
 };
