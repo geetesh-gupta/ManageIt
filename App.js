@@ -16,7 +16,11 @@ import Login from "./screens/Login";
 import Home from "./screens/Home";
 import Board from "./screens/Board";
 import BoardsList from "./screens/BoardsList";
+import CardsList from "./screens/CardsList";
 import { initFirebase } from "./assets/firebase";
+import CreateBoard from "./screens/CreateBoard";
+import CreateCardsList from "./screens/CreateCardsList";
+import CreateCardItem from "./screens/CreateCardItem";
 
 initFirebase();
 
@@ -69,7 +73,11 @@ export default function App(props) {
           <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="BoardsList" component={BoardsList} />
+          <Stack.Screen name="CardsList" component={CardsList} />
           <Stack.Screen name="Board" component={Board} />
+          <Stack.Screen name="NewBoard" component={CreateBoard} />
+          <Stack.Screen name="NewList" component={CreateCardsList} />
+          <Stack.Screen name="NewCard" component={CreateCardItem} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>
