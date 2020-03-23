@@ -15,3 +15,17 @@ export const alertDialog = onSuccess => {
     { cancelable: false }
   );
 };
+
+export const errorDialog = (desc, onSubmit) => {
+  Alert.alert(
+    "Error",
+    desc,
+    [
+      {
+        text: "OK",
+        onPress: () => onSubmit()
+      }
+    ],
+    { cancelable: false }
+  );
+};
