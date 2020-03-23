@@ -70,14 +70,7 @@ export default class CardsList extends React.Component {
     return (
       <Card style={styles.card}>
         <CardSection style={styles.cardSection}>
-          <StyledText
-            style={{
-              alignSelf: "center",
-              color: fontStyle.FONT_COLOR_SECONDARY
-            }}
-          >
-            {this.state.title}
-          </StyledText>
+          <StyledText style={styles.text}>{this.state.title}</StyledText>
           <PlusCircle
             size={30}
             onPress={() =>
@@ -107,6 +100,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "flex-start",
     backgroundColor: baseColors.BACKGROUND_COLOR_SECONDARY
+  },
+  text: {
+    alignSelf: "center",
+    color: fontStyle.FONT_COLOR_SECONDARY
   }
 });
 
