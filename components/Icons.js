@@ -68,6 +68,25 @@ const EditCircle = props => {
   );
 };
 
+const AttachmentCircle = props => {
+  return (
+    <Icon.Button
+      name={"attachment"}
+      size={iconStyle.ICON_SIZE_LARGE}
+      color={"white"}
+      backgroundColor={baseColors.BACKGROUND_COLOR_SECONDARY}
+      borderRadius={iconStyle.ICON_SIZE_LARGE}
+      onPress={props.onPress}
+      style={[
+        {
+          paddingRight: 0
+        },
+        props.style
+      ]}
+    />
+  );
+};
+
 const CloseCircle = props => {
   return (
     <Icon.Button
@@ -83,4 +102,11 @@ const CloseCircle = props => {
   );
 };
 
-export { CheckCircle, PlusCircle, EditCircle, CloseCircle, CrossCircle };
+export {
+  CheckCircle,
+  PlusCircle,
+  EditCircle,
+  AttachmentCircle,
+  CloseCircle,
+  CrossCircle
+};
