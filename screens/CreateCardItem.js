@@ -5,19 +5,22 @@ import { FormColoredTextField } from "../components/FormColoredTextField";
 import { FormButton } from "../components/FormButton";
 import { createFirebaseData, authFirebase } from "../assets/firebase";
 import { goBack } from "../components/RootNavigation";
+import { FormDatePicker } from "../components/FormDatePicker";
+import { FormTimePicker } from "../components/FormTimePicker";
 
 export default class CreateCardItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { title: "" };
+    this.state = { title: "", desc: "", dueDate: "", dueTime: "" };
   }
 
-  createNewCard = title => {
+  createNewCard = () => {
+    const { title, desc, dueDate, dueTime } = this.state;
     const { currentUser } = authFirebase();
     const { listId, callback } = this.props.route.params;
     createFirebaseData(
       `${currentUser.uid}/cards/`,
-      { title, listId },
+      { title, desc, dueDate, dueTime, listId },
       res => {
         console.log("New Card Created", res.key);
         callback(res.key);
@@ -31,13 +34,22 @@ export default class CreateCardItem extends React.Component {
     return (
       <FormView>
         <FormColoredTextField
-          title="Create new card"
+          title="Title"
           onChangeText={title => this.setState({ title })}
         />
-        <FormButton
-          value="Create"
-          onFormSubmit={() => this.createNewCard(this.state.title)}
+        <FormColoredTextField
+          title="Description"
+          onChangeText={desc => this.setState({ desc })}
         />
+        <FormDatePicker
+          title="Select Date"
+          onPress={dueDate => this.setState({ dueDate })}
+        />
+        <FormTimePicker
+          title="Select Time"
+          onPress={dueTime => this.setState({ dueTime })}
+        />
+        <FormButton value="Create" onFormSubmit={() => this.createNewCard()} />
       </FormView>
     );
   }
