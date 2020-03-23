@@ -7,7 +7,7 @@ import { CardSection } from "../components/CardSection";
 import { PlusCircle } from "../components/Icons";
 import { StyledText } from "../components/StyledText";
 import { navigate } from "../components/RootNavigation";
-
+import Layout from "../constants/Layout";
 export default class CardsList extends React.Component {
   constructor(props) {
     super(props);
@@ -37,8 +37,18 @@ export default class CardsList extends React.Component {
 
   renderItem = ({ title, boardId }) => {
     return (
-      <TouchableOpacity onPress={() => navigate("Board", { boardId })}>
-        <Card style={{ borderColor: "black", margin: 10 }}>
+      <TouchableOpacity
+        onPress={() => navigate("Board", { boardId })}
+        style={{ flexGrow: 1, alignSelf: "center" }}
+      >
+        <Card
+          style={{
+            borderColor: "black",
+            margin: 10,
+            height: 120,
+            width: 240
+          }}
+        >
           <CardSection>
             <StyledText>{title}</StyledText>
           </CardSection>
@@ -55,9 +65,22 @@ export default class CardsList extends React.Component {
           <StyledText>Hi {currentUser && currentUser.email}!</StyledText>
           <PlusCircle size={30} onPress={() => navigate("NewBoard")} />
         </CardSection>
-        <CardSection style={styles.cardSection}>
-          <List data={this.state.boards} renderItem={this.renderItem} />
-        </CardSection>
+        <View style={{ flex: 1 }}>
+          {Layout.isSmallDevice ? (
+            <List data={this.state.boards} renderItem={this.renderItem} />
+          ) : (
+            <List
+              data={this.state.boards}
+              renderItem={this.renderItem}
+              numColumns={3}
+              contentContainerStyle={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center"
+              }}
+            />
+          )}
+        </View>
       </View>
     );
   }
