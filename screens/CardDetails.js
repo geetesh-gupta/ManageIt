@@ -4,15 +4,12 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Card } from "../components/Card";
 import { CardSection } from "../components/CardSection";
 import { StyledText } from "../components/StyledText";
-import {
-  readFirebaseData,
-  updateFirebaseData,
-  authFirebase
-} from "../assets/firebase";
+import { readFirebaseData, authFirebase } from "../assets/firebase";
 import { navigate } from "../components/RootNavigation";
 import { baseColors, layoutStyle } from "../components/defaultStyles";
 import customStyles from "../components/styles";
-import { currentDate, formatDate3, formatTime } from "../assets/date";
+import { formatDate3, formatTime } from "../assets/date";
+import { EditCircle } from "../components/Icons";
 
 export default class CardDetails extends React.Component {
   constructor(props) {
@@ -53,24 +50,8 @@ export default class CardDetails extends React.Component {
     );
   }
 
-  updateCard = title => {
-    const { currentUser } = authFirebase();
-
-    updateFirebaseData(
-      `${currentUser.uid}/cards/`,
-      {
-        [this.state.cardId]: {
-          title
-        }
-      },
-      () => console.log("Card updated", this.state.cardId),
-      err => console.log("Err:", err, "| Card not updated", this.state.cardId)
-    );
-  };
-
   render() {
     const { cardId, title, desc, dueDate, dueTime } = this.state;
-    console.log(this.state);
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={() => navigate("CardDetails", { cardId })}>
@@ -82,6 +63,16 @@ export default class CardDetails extends React.Component {
                 >
                   {title}
                 </StyledText>
+              </CardSection>
+              <CardSection customStyles={{ flex: 1, flexWrap: "wrap" }}>
+                <EditCircle
+                  size={30}
+                  onPress={() =>
+                    navigate("UpdateCardItem", {
+                      data: this.state
+                    })
+                  }
+                />
               </CardSection>
             </View>
             <View style={styles.bottomCardSectionView}>
