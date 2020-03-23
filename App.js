@@ -21,6 +21,8 @@ import { initFirebase } from "./assets/firebase";
 import CreateBoard from "./screens/CreateBoard";
 import CreateCardsList from "./screens/CreateCardsList";
 import CreateCardItem from "./screens/CreateCardItem";
+import CardDetails from "./screens/CardDetails";
+import UpdateCardItem from "./screens/UpdateCardItem";
 
 initFirebase();
 
@@ -78,6 +80,8 @@ export default function App(props) {
           <Stack.Screen name="NewBoard" component={CreateBoard} />
           <Stack.Screen name="NewList" component={CreateCardsList} />
           <Stack.Screen name="NewCard" component={CreateCardItem} />
+          <Stack.Screen name="CardDetails" component={CardDetails} />
+          <Stack.Screen name="UpdateCardItem" component={UpdateCardItem} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>
