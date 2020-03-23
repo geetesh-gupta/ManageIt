@@ -23,7 +23,7 @@
     },
     "android": {
       "googleServicesFile": "./assets/googleServices.json",
-      "package": "com.gg.manageit",
+      "package": "com.manage.it",
       "versionCode": 1
     }
   }
