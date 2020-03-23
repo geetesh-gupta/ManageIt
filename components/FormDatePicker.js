@@ -14,11 +14,11 @@ class FormDatePicker extends React.Component {
 
   setDateAndroid = async () => {
     try {
-      var { action, year, month, day } = await DatePickerAndroid.open({
-        date: (this.state.date && new Date(this.state.date)) || new Date(),
+      let { action, year, month, day } = await DatePickerAndroid.open({
+        date: (this.state.date && new Date(this.state.date)) || "",
         maxDate: new Date()
       });
-      day = day > 9 ? day : "0" + day;
+      day = day > 9 ? day : `0${day}`;
       month = month > 8 ? month + 1 : "0" + (month + 1);
       if (action !== DatePickerAndroid.dismissedAction) {
         this.setState({ date: `${year}-${month}-${day}` });
