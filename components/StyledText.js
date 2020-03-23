@@ -8,12 +8,10 @@ const StyledText = props => {
 };
 
 StyledText.propTypes = {
-  style: PropTypes.object,
   children: PropTypes.node
 };
 
 StyledText.defaultProps = {
-  style: {},
   children: ""
 };
 
