@@ -49,6 +49,25 @@ const PlusCircle = props => {
   );
 };
 
+const EditCircle = props => {
+  return (
+    <Icon.Button
+      name={"pencil"}
+      size={iconStyle.ICON_SIZE_LARGE}
+      color={"white"}
+      backgroundColor={baseColors.BACKGROUND_COLOR_SECONDARY}
+      borderRadius={iconStyle.ICON_SIZE_LARGE}
+      onPress={props.onPress}
+      style={[
+        {
+          paddingRight: 0
+        },
+        props.style
+      ]}
+    />
+  );
+};
+
 const CloseCircle = props => {
   return (
     <Icon.Button
@@ -64,4 +83,4 @@ const CloseCircle = props => {
   );
 };
 
-export { CheckCircle, PlusCircle, CloseCircle, CrossCircle };
+export { CheckCircle, PlusCircle, EditCircle, CloseCircle, CrossCircle };
