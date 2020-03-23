@@ -22,7 +22,9 @@
       "supportsTablet": true
     },
     "android": {
-      "googleServicesFile": "./assets/googleServices.json"
+      "googleServicesFile": "./assets/googleServices.json",
+      "package": "com.gg.manageit",
+      "versionCode": 1
     }
   }
 }
