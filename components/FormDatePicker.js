@@ -15,7 +15,7 @@ class FormDatePicker extends React.Component {
   setDateAndroid = async () => {
     try {
       let { action, year, month, day } = await DatePickerAndroid.open({
-        date: (this.state.date && new Date(this.state.date)) || "",
+        date: (this.state.date && new Date(this.state.date)) || new Date(),
         maxDate: new Date()
       });
       day = day > 9 ? day : `0${day}`;
@@ -39,7 +39,7 @@ class FormDatePicker extends React.Component {
           }}
           onChangeText={date => {
             this.setState({ date });
-            this.props.onPress(this.state.value);
+            this.props.onPress(this.state.date);
           }}
           style={[styles.formBorder, styles.formTextfield]}
           value={this.state.date}

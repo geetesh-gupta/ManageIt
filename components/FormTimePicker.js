@@ -40,6 +40,10 @@ class FormTimePicker extends React.Component {
               this.props.onPress(this.state.time);
             });
           }}
+          onChangeText={time => {
+            this.setState({ time });
+            this.props.onPress(this.state.time);
+          }}
           style={[styles.formBorder, styles.formTextfield]}
           value={this.state.time}
           placeholder="Select Time"
